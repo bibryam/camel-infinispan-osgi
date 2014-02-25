@@ -225,3 +225,80 @@ install -s mvn:org.apache.camel/camel-infinispan/2.13-SNAPSHOT
 8. Deploy and start the demo
 Build: mvn clean install -DskipTests
 osgi:install -s mvn:com.ofbizian/infinispan-osgi/1.0-SNAPSHOT
+
+
+
+
+     features:addUrl mvn:org.infinispan/infinispan-client-hotrod/{project.version}/xml/features
+     features:install hotrod-client
+        or
+     features:install hotrod-client-with-query
+
+
+    <feature name="hotrod-client" version="${project.version}">
+        <bundle>mvn:org.jboss.logging/jboss-logging/3.1.2.GA</bundle>
+        <bundle>mvn:org.infinispan/infinispan-commons/7.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:commons-pool/commons-pool/1.6</bundle>
+        <bundle>mvn:org.jboss.marshalling/jboss-marshalling-osgi/1.4.2.Final</bundle>
+        <bundle>mvn:org.infinispan/infinispan-client-hotrod/7.0.0-SNAPSHOT</bundle>
+    </feature>
+
+    <feature name="infinispan" resolver="(obr)" version="${project.version}">
+        <bundle>mvn:org.jgroups/jgroups/3.4.2.Final</bundle>
+        <!--<bundle>wrap:mvn:org.jboss.modules/jboss-modules/1.4.0.Beta1-SNAPSHOT</bundle>   &lt;!&ndash; TODO&ndash;&gt;-->
+        <bundle>mvn:org.infinispan/infinispan-core/7.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:org.infinispan/infinispan-commons/7.0.0-SNAPSHOT</bundle>
+
+        <feature dependency="true">camel-core</feature>
+        <feature dependency="true">hotrod-client</feature>
+        <bundle>mvn:org.apache.camel/camel-infinispan/2.13-SNAPSHOT</bundle>
+    </feature>
+
+    fabric:profile-edit --repositories mvn:org.infinispan/infinispan-client-hotrod/7.0.0-SNAPSHOT/xml/features camel
+    fabric:profile-edit --features hotrod-client/0.0.0  camel
+
+        fabric:profile-edit --repositories mvn:com.ofbizian/demo/6.0-SNAPSHOT/xml/features camel
+        fabric:profile-edit --features infinispan/0.0.0  camel
+
+           osgi:install -s mvn:com.ofbizian/demo/5.0-SNAPSHOT
+
+
+    com/ofbizian/camel-infinispan-updated/5.0-SNAPSHOT/camel-infinispan-updated-5.0-SNAPSHOT.jar
+
+         features:addUrl mvn:com.ofbizian/demo/6.0-SNAPSHOT/xml/features
+
+             features:addUrl mvn:com.ofbizian/demo/${project.version}/xml/features
+             features:install infinispan-hotrod-client
+             features:install infinispan-core
+             features:install infinispan-demo
+                or
+             features:install hotrod-client-with-query
+
+        -->
+ osgi:install -s wrap:mvn:commons-lang/commons-lang/2.4$Bundle-SymbolicName=commons-lang&Bundle-Version=2.4'
+
+                mvn:org.apache.camel/camel-infinispan/${camel-version}
+
+
++        <camel.osgi.version.clean>2.10.0</camel.osgi.version.clean>
++        <camel.osgi.version>version=2.10.0</camel.osgi.version>
+     </properties>
+
+     <dependencies>
+         <dependency>
+             <groupId>org.apache.camel</groupId>
+             <artifactId>camel-core</artifactId>
++            <version>2.10.0</version>
+         </dependency>
+         <dependency>
+             <groupId>org.infinispan</groupId>
+             <artifactId>infinispan-core</artifactId>
+-            <version>${infinispan-version}</version>
++            <version>7.0.0-SNAPSHOT</version>
+         </dependency>
+         <dependency>
+             <groupId>org.infinispan</groupId>
+             <artifactId>infinispan-client-hotrod</artifactId>
+-            <version>${infinispan-version}</version>
++            <version>7.0.0-SNAPSHOT</version>
+
