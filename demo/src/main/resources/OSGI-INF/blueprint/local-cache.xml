@@ -26,7 +26,7 @@
 
       <route>
           <!-- get a value -->
-          <from uri="infinispan://localhost?cacheContainer=#localCache&amp;eventTypes=CACHE_ENTRY_CREATED"/>
+          <from uri="infinispan://foo?cacheContainer=#localCache&amp;eventTypes=CACHE_ENTRY_CREATED"/>
 
           <to uri="log:local-get?showAll=true"/>
       </route>
@@ -41,7 +41,7 @@
           <setHeader headerName="CamelInfinispanValue">
               <property>Exchange.TIMER_COUNTER</property>
           </setHeader>
-          <to uri="infinispan://localhost?cacheContainer=#localCache"/>
+          <to uri="infinispan://foo?cacheContainer=#localCache"/>
           <to uri="log:local-put?showAll=true"/>
       </route>
 

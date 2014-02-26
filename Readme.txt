@@ -9,7 +9,7 @@ Camel Infinispan component on JBoss Fuse
 5. Start JBoss fuse: jboss-fuse-6.0.0.redhat-024/bin/fuse
 
 6. Install the demo:
-features:addUrl mvn:com.ofbizian/demo/1.0-SNAPSHOT/xml/features
+features:addUrl mvn:com.ofbizian/demo/1.0.0/xml/features
 features:install infinispan-demo
 
 
