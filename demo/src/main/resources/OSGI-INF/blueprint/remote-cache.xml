@@ -20,11 +20,11 @@
            xsi:schemaLocation="
            http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
-  <camelContext id="infinispan-camel-jta" xmlns="http://camel.apache.org/schema/blueprint">
+  <camelContext id="remote-cache-example" xmlns="http://camel.apache.org/schema/blueprint">
 
       <route>
           <!-- put a value -->
-          <from uri="timer://foo?fixedRate=true&amp;period=5000"/>
+          <from uri="timer://remote?fixedRate=true&amp;period=5000"/>
 
           <setHeader headerName="CamelInfinispanKey">
               <property>Exchange.TIMER_COUNTER</property>
@@ -33,7 +33,7 @@
               <property>Exchange.TIMER_COUNTER</property>
           </setHeader>
           <to uri="infinispan://localhost"/>
-          <to uri="log:put?showAll=true"/>
+          <to uri="log:remote-put?showAll=true"/>
 
           <!-- Now read the same value -->
           <setHeader headerName="CamelInfinispanOperation">
@@ -43,7 +43,7 @@
               <property>Exchange.TIMER_COUNTER</property>
           </setHeader>
           <to uri="infinispan://localhost"/>
-          <to uri="log:get?showAll=true"/>
+          <to uri="log:remote-get?showAll=true"/>
       </route>
 
   </camelContext>
