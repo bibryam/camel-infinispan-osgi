@@ -95,6 +95,7 @@
                     <manifestLocation>target/META-INF</manifestLocation>
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+
                         <Import-Package>*</Import-Package>
                     </instructions>
                 </configuration>
