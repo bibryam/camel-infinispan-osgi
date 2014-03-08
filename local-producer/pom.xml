@@ -25,34 +25,29 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>component</artifactId>
+    <artifactId>local-producer</artifactId>
     <packaging>bundle</packaging>
 
-    <properties>
-        <camel-version>2.13-SNAPSHOT</camel-version>
-    </properties>
-
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.camel</groupId>-->
+            <!--<artifactId>camel-infinispan</artifactId>-->
+            <!--<version>${camel-version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.ofbizian</groupId>
+            <artifactId>component</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-infinispan</artifactId>
+            <artifactId>camel-core</artifactId>
             <version>${camel-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+            <version>${infinispan-version}</version>
+        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Embed-Dependency>*;scope=compile;inline=true</Embed-Dependency>
-                        <_include>src/main/resources/META-INF/MANIFEST.MF</_include>
-                    </instructions>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

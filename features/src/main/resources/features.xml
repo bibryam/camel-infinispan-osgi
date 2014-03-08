@@ -25,6 +25,7 @@
     </feature>
 
     <feature name="infinispan-core" resolver="(obr)" version="${infinispan-version}">
+        <feature>transaction</feature>
         <bundle>mvn:org.jgroups/jgroups/3.4.2.Final</bundle>
         <!--<bundle>wrap:mvn:org.jboss.modules/jboss-modules/1.4.0.Beta1-SNAPSHOT</bundle>  -->
         <bundle>mvn:org.jboss.marshalling/jboss-marshalling-osgi/1.4.2.Final</bundle>
@@ -33,12 +34,41 @@
         <bundle>mvn:org.infinispan/infinispan-commons/${infinispan-version}</bundle>
     </feature>
 
-    <feature name="infinispan-demo" resolver="(obr)" version="${project.version}">
+    <feature name="infinispan-osgi" resolver="(obr)" version="${project.version}">
+        <feature>infinispan-core</feature>
+        <configfile finalname="/etc/jgroups-tcp-sample.xml">mvn:com.ofbizian/infinispan-osgi/${project.version}/xml/jgroups-tcp-sample</configfile>
+        <configfile finalname="/etc/jgroups-udp-sample.xml">mvn:com.ofbizian/infinispan-osgi/${project.version}/xml/jgroups-udp-sample</configfile>
+        <configfile finalname="/etc/infinispan.xml">mvn:com.ofbizian/infinispan-osgi/${project.version}/xml/infinispan</configfile>
+        <configfile finalname="/etc/org.jboss.infinispan.server-default.cfg">mvn:com.ofbizian/infinispan-osgi/${project.version}/cfg/infinispan</configfile>
+        <bundle>mvn:com.ofbizian/infinispan-osgi/${project.version}</bundle>
+    </feature>
+
+    <feature name="local-consumer" resolver="(obr)" version="${project.version}">
+        <feature dependency="true">infinispan-core</feature>
+        <feature dependency="true">infinispan-hotrod-client</feature>
+        <feature dependency="true">infinispan-osgi</feature>
+        <bundle>mvn:org.apache.camel/camel-core/${camel-version}</bundle>
+        <!--<bundle>mvn:org.apache.camel/camel-infinispan/${camel-version}</bundle>-->
+        <bundle>mvn:com.ofbizian/component/${project.version}</bundle>
+        <bundle>mvn:com.ofbizian/local-consumer/${project.version}</bundle>
+    </feature>
+
+    <feature name="local-producer" resolver="(obr)" version="${project.version}">
+        <feature dependency="true">infinispan-core</feature>
+        <feature dependency="true">infinispan-hotrod-client</feature>
+        <feature dependency="true">infinispan-osgi</feature>
+        <bundle>mvn:org.apache.camel/camel-core/${camel-version}</bundle>
+        <!--<bundle>mvn:org.apache.camel/camel-infinispan/${camel-version}</bundle>-->
+        <bundle>mvn:com.ofbizian/component/${project.version}</bundle>
+        <bundle>mvn:com.ofbizian/local-producer/${project.version}</bundle>
+    </feature>
+
+    <feature name="remote-producer" resolver="(obr)" version="${project.version}">
         <feature dependency="true">infinispan-core</feature>
         <feature dependency="true">infinispan-hotrod-client</feature>
         <bundle>mvn:org.apache.camel/camel-core/${camel-version}</bundle>
         <!--<bundle>mvn:org.apache.camel/camel-infinispan/${camel-version}</bundle>-->
         <bundle>mvn:com.ofbizian/component/${project.version}</bundle>
-        <bundle>mvn:com.ofbizian/demo/${project.version}</bundle>
+        <bundle>mvn:com.ofbizian/remote-producer/${project.version}</bundle>
     </feature>
 </features>
