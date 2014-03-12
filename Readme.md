@@ -17,7 +17,7 @@
 - Start infinispan server: infinispan-server-7.0.0-SNAPSHOT/bin/standalone.sh (only needed for Remote Producer demo)
 - Start JBoss fuse: jboss-fuse-6.0.0.redhat-024/bin/fuse
 
-*Creates a new karaf instance (destroy old one if it exists)*  
+*Creates a new karaf instance (destroy old one if it exists) and connect to it*  
 
     admin:stop consumer  
     admin:destroy consumer  
@@ -30,18 +30,18 @@
     features:addUrl mvn:org.apache.camel.karaf/apache-camel/2.10.0.redhat-60024/xml/features
     features:install camel
 
-*This will create an Infinispan EmbeddedCacheManager and make it available as OSGI service*  
+*Create an Infinispan EmbeddedCacheManager and wait till it becomes available as OSGI service*  
 
     features:addUrl mvn:com.ofbizian/features/1.0.0/xml/features
     features:install infinispan-osgi
     dev:wait-for-service "org.infinispan.manager.EmbeddedCacheManager"
 
-*Creates a Camel route that listens for event in the EmbeddedCacheManager created above in the same JVM*
+*Create a Camel route that listen for event in the EmbeddedCacheManager created above in the same JVM*
 
     features:install local-consumer
     log:tail
 
-*Creates a new karaf instance (destroy old one if it exists)*
+*Create a new karaf instance (destroy old one if it exists) and connect to it*
 
     ./client -u admin -p admin
     admin:stop producer
@@ -61,12 +61,12 @@
     features:install infinispan-osgi
     dev:wait-for-service "org.infinispan.manager.EmbeddedCacheManager"
 
-*Creates a Camel route send data every 10s to the EmbeddedCacheManager created above in the same JVM* 
+*Create a Camel route send data every 10s to the EmbeddedCacheManager created above in the same JVM* 
 
     features:install local-producer
     log:tail
 
-*Install hawtio to see the caches.*
+*Install hawtio to see the caches*
 
     features:addurl mvn:io.hawt/hawtio-karaf/1.2.2/xml/features
     eatures:install hawtio
