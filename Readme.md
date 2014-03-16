@@ -18,6 +18,7 @@
 - **Local-Consumer** - Demonstrates how to receive events from an Embedded Cache in the same JVM created with  Infinispan-OSGI bundle.
 - **Local-Producer** - Demonstrates how to sent data to an Embedded Cache in the same JVM created with Infinispan-OSGI bundle.
 - **Remote-Producer** - Demonstrates how to sent data to Remote standalone cache
+- **Remote-Query** - Demonstrates how to search data based on the cache value using Remote standalone cache
 - **Features** - created OSGI features that groups a number of bundles into a feature for easier deployment
 
 
@@ -25,20 +26,15 @@
 - Start infinispan server: infinispan-server-7.0.0-SNAPSHOT/bin/standalone.sh (only needed for Remote Producer demo)
 - Start JBoss fuse: jboss-fuse-6.0.0.redhat-024/bin/fuse
 
-*Creates a new karaf instance (destroy old one if it exists) and connect to it*  
+*Creates a new child karaf instance (destroy old one if it exists) and connect to it*
 
     admin:stop consumer  
     admin:destroy consumer  
     admin:create consumer  
     admin:start consumer  
-    admin:connect -u karaf consumer  
+    admin:connect -u karaf consumer
 
-*Install camel*
-
-    features:addUrl mvn:org.apache.camel.karaf/apache-camel/2.10.0.redhat-60024/xml/features
-    features:install camel
-
-*Create an Infinispan EmbeddedCacheManager and wait till it becomes available as OSGI service*  
+*Demo 1. Create an Infinispan EmbeddedCacheManager and wait till it becomes available as OSGI service*
 
     features:addUrl mvn:com.ofbizian/features/1.0.0/xml/features
     features:install infinispan-server
@@ -46,22 +42,18 @@
 
 *Create a Camel route that listen for event in the EmbeddedCacheManager created above in the same JVM*
 
-    features:install local-consumer
+    features:addUrl mvn:org.apache.camel.karaf/apache-camel/2.10.0.redhat-60024/xml/features
+    features:install demo-local-consumer
     log:tail
 
-*Create a new karaf instance (destroy old one if it exists) and connect to it*
+*Demo 2. Create another child karaf instance (destroy old one if it exists) and connect to it*
 
-    ./client -u admin -p admin
+    cd fuse/bin ./client -u admin -p admin
     admin:stop producer
     admin:destroy producer
     admin:create producer
     admin:start producer
     admin:connect -u karaf producer
-
-*Install camel*
-
-    features:addUrl mvn:org.apache.camel.karaf/apache-camel/2.10.0.redhat-60024/xml/features
-    features:install camel
 
 *This will create an Infinispan EmbeddedCacheManager and make it available as OSGI service*
 
@@ -69,15 +61,35 @@
     features:install infinispan-server
     dev:wait-for-service "org.infinispan.manager.EmbeddedCacheManager"
 
-*Create a Camel route send data every 10s to the EmbeddedCacheManager created above in the same JVM* 
+*Create a Camel route send data every 10s to the EmbeddedCacheManager created above in the same JVM*
 
-    features:install local-producer
+    features:addUrl mvn:org.apache.camel.karaf/apache-camel/2.10.0.redhat-60024/xml/features
+    features:install demo-local-producer
     log:tail
+
+
+*Demo 3. Create another child karaf instance (destroy old one if it exists) and connect to it*
+
+    cd fuse/bin ./client -u admin -p admin
+    admin:stop remote-producer
+    admin:destroy remote-producer
+    admin:create remote-producer
+    admin:start remote-producer
+    admin:connect -u karaf remote-producer
+
+*This will create a Camel route send data every 10s to a remote standalone Infinispan server*
+
+    features:addUrl mvn:com.ofbizian/features/1.0.0/xml/features
+    features:addUrl mvn:org.apache.camel.karaf/apache-camel/2.10.0.redhat-60024/xml/features
+    features:install demo-remote-producer
+    log:tail
+
+*Demo 4. Same as 3 but do: features:install demo-remote-query*
 
 *Install hawtio to see the caches*
 
     features:addurl mvn:io.hawt/hawtio-karaf/1.2.2/xml/features
-    eatures:install hawtio
+    features:install hawtio
 
 
 ###Notes

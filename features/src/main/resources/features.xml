@@ -60,7 +60,8 @@
         <bundle>mvn:org.infinispan.protostream/protostream/1.0.0.Final</bundle>
     </feature>
 
-    <feature name="local-consumer" resolver="(obr)" version="${project.version}">
+    <feature name="demo-local-consumer" resolver="(obr)" version="${project.version}">
+        <feature>camel</feature>
         <feature dependency="true">infinispan-core</feature>
         <feature dependency="true">infinispan-hotrod-client</feature>
         <feature dependency="true">infinispan-server</feature>
@@ -69,7 +70,8 @@
         <bundle>mvn:com.ofbizian/local-consumer/${project.version}</bundle>
     </feature>
 
-    <feature name="local-producer" resolver="(obr)" version="${project.version}">
+    <feature name="demo-local-producer" resolver="(obr)" version="${project.version}">
+        <feature>camel</feature>
         <feature dependency="true">infinispan-core</feature>
         <feature dependency="true">infinispan-hotrod-client</feature>
         <feature dependency="true">infinispan-server</feature>
@@ -78,7 +80,8 @@
         <bundle>mvn:com.ofbizian/local-producer/${project.version}</bundle>
     </feature>
 
-    <feature name="remote-producer" resolver="(obr)" version="${project.version}">
+    <feature name="demo-remote-producer" resolver="(obr)" version="${project.version}">
+        <feature>camel</feature>
         <feature dependency="true">infinispan-core</feature>
         <feature dependency="true">infinispan-hotrod-client</feature>
         <bundle>mvn:org.apache.camel/camel-core/${camel-version}</bundle>
@@ -86,11 +89,11 @@
         <bundle>mvn:com.ofbizian/remote-producer/${project.version}</bundle>
     </feature>
 
-    <feature name="remote-query" resolver="(obr)" version="${project.version}">
+    <feature name="demo-remote-query" resolver="(obr)" version="${project.version}">
+        <feature>camel</feature>
         <feature dependency="true">infinispan-core</feature>
         <feature dependency="true">infinispan-hotrod-client</feature>
         <feature dependency="true">infinispan-query-client</feature>
-
         <bundle>mvn:org.apache.camel/camel-core/${camel-version}</bundle>
         <bundle>mvn:com.ofbizian/component/${project.version}</bundle>
         <bundle>mvn:com.ofbizian/remote-query/${project.version}</bundle>
