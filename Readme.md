@@ -1,5 +1,12 @@
 ##Camel Infinispan component on JBoss Fuse 6.0
 
+
+####Clustering Diagram
+![Clustering Diagram](http://4.bp.blogspot.com/-8klGVWhIpNE/UyWIpn_Cx1I/AAAAAAAAAhI/i8gAyVqIdAg/s1600/camel-infinispan-clustering.png)
+####Remote Connection Diagram
+
+![Remote connection Diagram](http://2.bp.blogspot.com/-SknGJlX4_DQ/UyWIp6ySoKI/AAAAAAAAAhM/OfnPFPGyrfE/s1600/camel-infinispan-remote.png)
+
 ####Building the project
 - Clone and build Apache Camel trunk 2.13-SNAPSHOT
 - Clone and build JBoss Infinispan trunk 7.0.0-SNAPSHOT
@@ -12,6 +19,7 @@
 - **Local-Producer** - Demonstrates how to sent data to an Embedded Cache in the same JVM created with Infinispan-OSGI bundle.
 - **Remote-Producer** - Demonstrates how to sent data to Remote standalone cache
 - **Features** - created OSGI features that groups a number of bundles into a feature for easier deployment
+
 
 ####Running
 - Start infinispan server: infinispan-server-7.0.0-SNAPSHOT/bin/standalone.sh (only needed for Remote Producer demo)
@@ -88,3 +96,8 @@
     export JAVA_OPTS="-Djgroups.remote_addr=172.17.0.3[7800],172.17.0.4[7800], -Djgroups.tcp.address=172.17.0.2"  
     export JAVA_OPTS="-Djgroups.remote_addr=172.17.0.2[7800],172.17.0.4[7800], -Djgroups.tcp.address=172.17.0.3"  
     export JAVA_OPTS="-Djgroups.remote_addr=172.17.0.2[7800],172.17.0.3[7800], -Djgroups.tcp.address=172.17.0.4"  
+
+
+
+
+
