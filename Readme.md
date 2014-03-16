@@ -41,7 +41,7 @@
 *Create an Infinispan EmbeddedCacheManager and wait till it becomes available as OSGI service*  
 
     features:addUrl mvn:com.ofbizian/features/1.0.0/xml/features
-    features:install infinispan-osgi
+    features:install infinispan-server
     dev:wait-for-service "org.infinispan.manager.EmbeddedCacheManager"
 
 *Create a Camel route that listen for event in the EmbeddedCacheManager created above in the same JVM*
@@ -66,7 +66,7 @@
 *This will create an Infinispan EmbeddedCacheManager and make it available as OSGI service*
 
     features:addUrl mvn:com.ofbizian/features/1.0.0/xml/features
-    features:install infinispan-osgi
+    features:install infinispan-server
     dev:wait-for-service "org.infinispan.manager.EmbeddedCacheManager"
 
 *Create a Camel route send data every 10s to the EmbeddedCacheManager created above in the same JVM* 
@@ -81,7 +81,7 @@
 
 
 ###Notes
- - Creating EmbeddedCacheManager can be done by installing infinispan-osgi bundle with some configuration file or manually.
+ - Creating EmbeddedCacheManager can be done by installing infinispan-server bundle with some configuration file or manually.
  - Creating EmbeddedCacheManager manually is as following:
     `<bean id="globalConfiguration" class="com.ofbizian.infinispan.ConfigurationFactory" factory-method="build"/>
     <bean id="localCache" class="org.infinispan.manager.DefaultCacheManager" init-method="start" destroy-method="stop">

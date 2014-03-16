@@ -20,6 +20,12 @@
             <sync/>
         </clustering>
 
+        <indexing enabled="false" indexLocalOnly="true">
+            <properties>
+                <property name="default.directory_provider" value="ram" />
+            </properties>
+        </indexing>
+
         <!--<clustering mode="distribution">-->
         <!--<sync/>-->
         <!--<hash numOwners="2"/>-->

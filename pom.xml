@@ -43,6 +43,7 @@
         <module>local-consumer</module>
         <module>local-producer</module>
         <module>remote-producer</module>
+        <module>remote-query</module>
         <module>features</module>
     </modules>
 
