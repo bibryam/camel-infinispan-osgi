@@ -30,7 +30,7 @@
     <camelContext id="local-consumer" xmlns="http://camel.apache.org/schema/blueprint">
 
       <route>
-          <from uri="infinispan://foo?cacheContainer=#localCache"/>
+          <from uri="infinispan://foo?cacheContainer=#localCache&amp;cacheName=the-default-cache"/>
 
           <to uri="log:local-get?showAll=true"/>
       </route>

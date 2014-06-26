@@ -37,7 +37,7 @@
           <setHeader headerName="CamelInfinispanValue">
               <property>Exchange.TIMER_COUNTER</property>
           </setHeader>
-          <to uri="infinispan://foo?cacheContainer=#localCache"/>
+          <to uri="infinispan://foo?cacheContainer=#localCache&amp;cacheName=the-default-cache"/>
           <to uri="log:local-put?showAll=true"/>
       </route>
   </camelContext>

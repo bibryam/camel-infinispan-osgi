@@ -1,7 +1,0 @@
-package com.ofbizian.infinispan;
-
-message Book {
-  required string id = 1;
-  required string title = 2;
-  required string isbn = 3;
-}

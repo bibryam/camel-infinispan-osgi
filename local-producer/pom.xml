@@ -29,14 +29,9 @@
     <packaging>bundle</packaging>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>org.apache.camel</groupId>-->
-            <!--<artifactId>camel-infinispan</artifactId>-->
-            <!--<version>${camel-version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.ofbizian</groupId>
-            <artifactId>component</artifactId>
+            <artifactId>camel-infinispan</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

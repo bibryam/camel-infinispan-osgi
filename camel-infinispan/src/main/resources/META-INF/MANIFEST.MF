@@ -1,0 +1,41 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1395004665246
+Build-Jdk: 1.7.0_51
+Built-By: bibryam
+Bundle-Description: Camel Infinispan support
+Bundle-DocURL: http://www.apache.org/
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: camel-infinispan
+Bundle-SymbolicName: org.apache.camel.camel-infinispan
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.13.1
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.apache.camel.component.infinispan;uses:="org.infinis
+ pan.notifications,org.apache.camel.impl,org.apache.camel,org.apache.cam
+ el.component.infinispan.processor.query,org.infinispan.commons.api,org.
+ infinispan,org.infinispan.manager,org.slf4j,org.infinispan.client.hotro
+ d,org.infinispan.query,org.infinispan.query.dsl,org.infinispan.client.h
+ otrod.configuration,org.infinispan.notifications.cachelistener.event,or
+ g.infinispan.notifications.cachelistener.annotation";version="2.13.1",o
+ rg.apache.camel.component.infinispan.processor.idempotent;uses:="org.ap
+ ache.camel.api.management,org.apache.camel.support,org.infinispan.commo
+ ns.api,org.infinispan.manager,org.apache.camel.spi";version="2.13.1",or
+ g.apache.camel.component.infinispan.processor.query;uses:="org.infinisp
+ an.query.dsl";version="2.13.1"
+Export-Service: org.apache.camel.spi.ComponentResolver;component=infinis
+ pan
+Implementation-Title: Apache Camel
+Implementation-Version: 2.13.1
+Import-Package: org.apache.camel;version="[2.10,2.14)",org.apache.camel.
+ api.management;version="[2.10,2.14)",org.apache.camel.impl;version="[2.
+ 10,2.14)",org.apache.camel.spi;version="[2.10,2.14)",org.apache.camel.s
+ upport;version="[2.10,2.14)",org.infinispan;version="[7.0,8)",org.infin
+ ispan.client.hotrod;version="[7.0,8)",org.infinispan.client.hotrod.conf
+ iguration;version="[7.0,8)",org.infinispan.commons.api;version="[7.0,8)
+ ",org.infinispan.manager;version="[7.0,8)",org.infinispan.notifications
+ ;version="[7.0,8)",org.infinispan.notifications.cachelistener.annotatio
+ n;version="[7.0,8)",org.infinispan.notifications.cachelistener.event;ve
+ rsion="[7.0,8)",org.slf4j;version="[1.6,2)"
+Karaf-Info: Camel;camel-infinispan=2.13.0
+Tool: Bnd-1.50.0

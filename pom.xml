@@ -26,24 +26,21 @@
     <packaging>pom</packaging>
 
     <name>Camel :: Infinispan :: OSGI</name>
-    <description>Camel Infinispan on OSGI</description>
+    <description>Camel Infinispan on OSGI Demos</description>
     <url>http://www.ofbizian.com</url>
 
     <properties>
-        <!--<camel-version>2.13-SNAPSHOT</camel-version>-->
-        <camel-version>2.10.0</camel-version>
+        <!--<camel-version>2.12.0</camel-version>-->
+        <camel-version>2.10.0.redhat-60024</camel-version>
         <infinispan-version>7.0.0-SNAPSHOT</infinispan-version>
-        <!--<infinispan-version>6.0.1.Final</infinispan-version>-->
-        <org.osgi.core.version>4.2.0</org.osgi.core.version>
     </properties>
 
     <modules>
-        <module>component</module>
-        <module>infinispan-osgi</module>
+        <module>camel-infinispan</module>
+        <module>cache-instance</module>
         <module>local-consumer</module>
         <module>local-producer</module>
         <module>remote-producer</module>
-        <module>remote-query</module>
         <module>features</module>
     </modules>
 
