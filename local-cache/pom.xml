@@ -25,19 +25,24 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>features</artifactId>
-    <description>Features ready to be deployed to Fuse 6.1</description>
+    <artifactId>local-cache</artifactId>
+    <packaging>bundle</packaging>
+    <description>Starts a cache instance and exposes it as OSGI service</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+            <version>${infinispan-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-server-hotrod</artifactId>
+            <version>${infinispan-version}</version>
+        </dependency>
+    </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -45,16 +50,26 @@
                 <executions>
                     <execution>
                         <id>attach-artifacts</id>
-                        <phase>generate-resources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>attach-artifact</goal>
                         </goals>
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>target/classes/features.xml</file>
+                                    <file>target/classes/infinispan.xml</file>
                                     <type>xml</type>
-                                    <classifier>features</classifier>
+                                    <classifier>infinispan</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>target/classes/jgroups-tcp-sample.xml</file>
+                                    <type>xml</type>
+                                    <classifier>jgroups-tcp-sample</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>target/classes/jgroups-udp-sample.xml</file>
+                                    <type>xml</type>
+                                    <classifier>jgroups-udp-sample</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>
@@ -63,4 +78,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

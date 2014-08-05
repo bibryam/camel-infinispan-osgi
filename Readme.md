@@ -1,77 +1,51 @@
-##Camel Infinispan component on JBoss Fuse 6.0
-This requires infinispan with 7.0.0-SNAPSHOT and https://github.com/infinispan/infinispan/pull/2640
+##JBoss Data Grid/Infinispan on JBoss Fuse/Karaf Demos
+These are a number of examples demonstrating how to use Infinispan/JDG on OSGI container such as Karaf/JBoss Fuse.
 
-####Clustering Diagram
-![Clustering Diagram](http://4.bp.blogspot.com/-8klGVWhIpNE/UyWIpn_Cx1I/AAAAAAAAAhI/i8gAyVqIdAg/s1600/camel-infinispan-clustering.png)
-####Remote Connection Diagram
-![Remote connection Diagram](http://2.bp.blogspot.com/-SknGJlX4_DQ/UyWIp6ySoKI/AAAAAAAAAhM/OfnPFPGyrfE/s1600/camel-infinispan-remote.png)
+####Prerequisite
+- The examples requires [Red Hat JBoss Data Grid 6.3.0 Maven Repository](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=31673&product=data.grid) but it would work also with Infinispan 7.0.
+- The OSGI container is [Red Hat JBoss Fuse 6.1.0 Full Install](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=29253) but Karaf 3 would also work just fine.
 
-####Building the project
-- Clone and build JBoss Infinispan trunk 7.0.0-SNAPSHOT
-- Clone and build this project
+####Building and running the project
+- Download JDG 6.3 Maven Repository
+- Update the pom.xml to point to JDG 6.3 Maven Repository folder
+- Run "mvn clean install" to build the project and create the offline repo with all the dependencies.
 
-####Modules
-- **Camel-infinispan** - modifies camel-infinispan manifest file so that camel-infinispan component with version 2.13.1 can be deployed on Fuse 6.0 and Fuse 6.1
-- **Cache-instance** - Allows creating Infinispan Caches declaratively by deploying the bundle on OSGI and using ManagedService.
-- **Local-Consumer** - Demonstrates how to receive events from an Embedded Cache in the same JVM created with  Infinispan-OSGI bundle.
-- **Local-Producer** - Demonstrates how to sent data to an Embedded Cache in the same JVM created with Infinispan-OSGI bundle.
-- **Remote-Producer** - Demonstrates how to sent data to Remote standalone cache
-- **Features** - created OSGI features that groups a number of bundles into a feature for easier deployment
+####Running the Demo
+- Update runDemoOnFuse61.sh to point to camel-infinispan-osgi/offline-repo/target/repo
+- Update runDemoOnFuse61.sh to point to jboss-fuse-full-6.1.0.redhat-379.zip
+- Copy and paste the content of runDemoOnFuse61.sh (don't execute the file). This will start Fuse 6.1 and install all the demos.
 
+####Modules/Features
+- **Local-cache** - Instantiates an Embedded Cache in the same JVM and exposes as OSGI services.
+- **Local-client** - A camel route that uses a bean to access the Embedded Cache instance exposed by Local-cache.
+- **Remote-client** - A camel route that uses a bean to access remotely running JDG 6.3
+- **Local-Camel-Consumer** - A camel route that uses camel-infinispan component to receive events from an Embedded Cache created by Local-cache module.
+- **Local-Camel-Producer** - A camel route that uses camel-infinispan component to sent data to an Embedded Cache created by Local-cache module.
+- **Remote-Camel-Producer** - A camel route that uses camel-infinispan component to sent data to remotely running JDG 6.3
+- **Features** - creates OSGI features so each demo is standalone deployment unit
+- **Offline-Repo** - creates a repo with all the dependencies for the demoes. Fuse 6.1 needs access to this repo to deploy all the demoes.
+- **Camel-Infinispan-Component** - modifies camel-infinispan component manifest so that camel-infinispan component with version 2.13.2 can be deployed on Fuse 6.0 or Fuse 6.1
 
-####Running
-- Start JBoss fuse: jboss-fuse-6.0.0.redhat-024/bin/fuse
+####Demos
+*Demo 1. Create an Embedded Cache and send data to it from a bean*
 
-*Demo 1. Create an Infinispan EmbeddedCacheManager and wait till it becomes available as OSGI service*
+    fabric:profile-edit --features local-cache demo-profile 1.1
+    fabric:profile-edit --features local-client demo-profile 1.1
 
-    features:addUrl mvn:com.ofbizian/features/1.0.0/xml/features
-    features:install cache-instance
-    dev:wait-for-service "org.infinispan.manager.EmbeddedCacheManager"
+*Demo 2. Connect to remotely running JDG instance using Hot Rod protocol*
 
-*Create a Camel route that listen for event in the EmbeddedCacheManager created above in the same JVM*
+    (Start infinispan server)sh jboss-datagrid-6.3.0-server/bin/standalone.sh
+    fabric:profile-edit --features remote-client demo-profile 1.1
 
-    features:addUrl mvn:org.apache.camel.karaf/apache-camel/2.10.0.redhat-60024/xml/features
-    features:install demo-local-consumer
-    log:tail
+*Demo 3. Create an Embedded Cache and read/write to it using camel-infinispan component*
 
-*Demo 2. Create another child karaf instance (destroy old one if it exists) and connect to it*
+    fabric:profile-edit --features local-cache demo-profile 1.1
+    fabric:profile-edit --features local-camel-consumer demo-profile 1.1
+    fabric:profile-edit --features local-camel-producer demo-profile 1.1
 
-    cd fuse/bin ./client -u admin -p admin
-    admin:create producer
-    admin:start producer
-    admin:connect -u admin producer
+*Demo 4. Connect to remotely running JDG instance using camel-infinispan component using Hot Rod protocol*
 
-*This will create an Infinispan EmbeddedCacheManager and make it available as OSGI service*
-
-    features:addUrl mvn:com.ofbizian/features/1.0.0/xml/features
-    features:install cache-instance
-    dev:wait-for-service "org.infinispan.manager.EmbeddedCacheManager"
-
-*Create a Camel route send data every 10s to the EmbeddedCacheManager created above in the same JVM*
-
-    features:addUrl mvn:org.apache.camel.karaf/apache-camel/2.10.0.redhat-60024/xml/features
-    features:install demo-local-producer
-    log:tail
-
-*Demo 3. Remote Producer example for sending and retrieving data from standalone Infinispan server.
-Start infinispan server: infinispan-server-7.0.0-SNAPSHOT/bin/standalone.sh (only needed for Remote Producer demo)
-
-    features:install demo-remote-producer
-    log:tail
-
-*Install hawtio to see the caches*
-
-    features:addurl mvn:io.hawt/hawtio-karaf/1.2.2/xml/features
-    features:install hawtio
+    (Start infinispan server)sh jboss-datagrid-6.3.0-server/bin/standalone.sh
+    fabric:profile-edit --features remote-camel-producer demo-profile 1.1
 
 
-###Notes
- - Creating EmbeddedCacheManager can be done by installing cache-instance bundle with some configuration file or manually.
- - Clustering is done by configuring Infinispan and JGroups, it is outside the scope of Camel. Infinispan-OSGI has infinispan.xml with replicated clustering configuration. It also uses jgroups-tcp-sample.xml to configure how EmbeddedCacheManager in each JVM will find EmbeddedCacheManager in the other JVM
-
-####Some JGroup configurations for myself while playing with Docker  
-
-    export JAVA_OPTS=-Djgroups.udp.mcast_addr=224.0.0.0  
-    export JAVA_OPTS="-Djgroups.remote_addr=172.17.0.3[7800],172.17.0.4[7800], -Djgroups.tcp.address=172.17.0.2"  
-    export JAVA_OPTS="-Djgroups.remote_addr=172.17.0.2[7800],172.17.0.4[7800], -Djgroups.tcp.address=172.17.0.3"  
-    export JAVA_OPTS="-Djgroups.remote_addr=172.17.0.2[7800],172.17.0.3[7800], -Djgroups.tcp.address=172.17.0.4"

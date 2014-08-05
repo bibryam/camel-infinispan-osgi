@@ -26,22 +26,30 @@
     <packaging>pom</packaging>
 
     <name>Camel :: Infinispan :: OSGI</name>
-    <description>Camel Infinispan on OSGI Demos</description>
+    <description>CAMEL :: JDG 6.3 :: FUSE 6.1 demos</description>
     <url>http://www.ofbizian.com</url>
 
     <properties>
-        <!--<camel-version>2.12.0</camel-version>-->
-        <camel-version>2.10.0.redhat-60024</camel-version>
-        <infinispan-version>7.0.0-SNAPSHOT</infinispan-version>
+        <!--<camel-version>2.10.0.redhat-60024</camel-version> --> <!-- for Fuse 6.0 -->
+        <!--<infinispan-version>7.0.0-SNAPSHOT</infinispan-version>--> <!-- for Infinispan master -->
+        <camel-version>2.12.0.redhat-610379</camel-version> <!-- for Fuse 6.1 -->
+        <infinispan-version>6.1.0.Final-redhat-4</infinispan-version> <!-- for JDG 6.3 -->
+        <camel-infinispan-component-version>2.13.2</camel-infinispan-component-version>
+        <karaf.version>2.3.0.redhat-610379</karaf.version>
     </properties>
 
     <modules>
-        <module>camel-infinispan</module>
-        <module>cache-instance</module>
-        <module>local-consumer</module>
-        <module>local-producer</module>
-        <module>remote-producer</module>
+        <module>remote-client</module>
+        <module>local-cache</module>
+        <module>local-client</module>
+
+        <module>local-camel-consumer</module>
+        <module>local-camel-producer</module>
+        <module>remote-camel-producer</module>
+
+        <module>camel-infinispan-component</module>
         <module>features</module>
+        <module>offline-repo</module>
     </modules>
 
     <dependencies>
@@ -79,4 +87,54 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>techpreview-all-repository</id>
+            <name>Red Hat Enterprise Maven Repository</name>
+            <url>http://maven.repository.redhat.com/techpreview/all/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>jboss-datagrid-repository</id>
+            <name>JBoss Data Grid Maven Repository</name>
+            <url>file:///home/bibryam/Downloads/jboss-datagrid-6.3.0-maven-repository</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>fuse-release</id>
+            <name>jboss Release Repository</name>
+            <url>http://repo.fusesource.com/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots/>
+            <id>fuse-ea</id>
+            <name>jboss EA Repository</name>
+            <url>https://repository.jboss.org/nexus/content/groups/ea/</url>
+        </repository>
+    </repositories>
 </project>

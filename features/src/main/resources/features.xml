@@ -15,62 +15,47 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<features>
-    <feature name="infinispan-hotrod-client" resolver="(obr)" version="${infinispan-version}">
-        <bundle>mvn:org.jboss.logging/jboss-logging/3.1.2.GA</bundle>
-        <bundle>mvn:org.infinispan/infinispan-commons/${infinispan-version}</bundle>
-        <bundle>mvn:commons-pool/commons-pool/1.6</bundle>
-        <bundle>mvn:org.jboss.marshalling/jboss-marshalling-osgi/1.4.4.Final</bundle>
-        <bundle>mvn:org.infinispan/infinispan-client-hotrod/${infinispan-version}</bundle>
+<features name="com.ofbizian">
+
+    <!-- Demo features w/o Camel component -->
+    <feature name="local-cache" resolver="(obr)" version="${project.version}">
+        <feature dependency="true">infinispan-core</feature>
+        <bundle>mvn:com.ofbizian/local-cache/${project.version}</bundle>
     </feature>
 
-    <feature name="infinispan-core" resolver="(obr)" version="${infinispan-version}">
-        <feature>transaction</feature>
-        <bundle>mvn:org.jgroups/jgroups/3.5.0.Beta7</bundle>
-        <bundle>mvn:org.jboss.marshalling/jboss-marshalling-osgi/1.4.4.Final</bundle>
-        <bundle>mvn:org.jboss.logging/jboss-logging/3.1.2.GA</bundle>
-        <bundle>mvn:org.infinispan/infinispan-core/${infinispan-version}</bundle>
-        <bundle>mvn:org.infinispan/infinispan-commons/${infinispan-version}</bundle>
+    <feature name="local-client" resolver="(obr)" version="${project.version}">
+        <feature dependency="true">infinispan-core</feature>
+        <bundle>mvn:com.ofbizian/local-client/${project.version}</bundle>
     </feature>
 
-    <feature name="cache-instance" resolver="(obr)" version="${project.version}">
-        <feature>infinispan-core</feature>
-        <configfile finalname="/etc/jgroups-tcp-sample.xml">mvn:com.ofbizian/cache-instance/${project.version}/xml/jgroups-tcp-sample</configfile>
-        <configfile finalname="/etc/jgroups-udp-sample.xml">mvn:com.ofbizian/cache-instance/${project.version}/xml/jgroups-udp-sample</configfile>
-        <configfile finalname="/etc/infinispan.xml">mvn:com.ofbizian/cache-instance/${project.version}/xml/infinispan</configfile>
-        <configfile finalname="/etc/org.jboss.infinispan.server-default.cfg">mvn:com.ofbizian/cache-instance/${project.version}/cfg/infinispan</configfile>
-        <bundle>mvn:org.infinispan/infinispan-osgi/${infinispan-version}</bundle>
-        <bundle>mvn:org.slf4j/slf4j-api/1.7.5</bundle>
-        <bundle>mvn:org.slf4j/slf4j-log4j12/1.7.5</bundle>
+    <feature name="remote-client" resolver="(obr)" version="${project.version}">
+        <feature dependency="true">infinispan-core</feature>
+        <feature dependency="true">hotrod-client</feature>
+        <bundle>mvn:com.ofbizian/remote-client/${project.version}</bundle>
     </feature>
 
-    <feature name="demo-local-consumer" resolver="(obr)" version="${project.version}">
+    <!-- Demo features w/ Camel-infinispan component -->
+    <feature name="local-camel-consumer" resolver="(obr)" version="${project.version}">
         <feature>camel</feature>
         <feature dependency="true">infinispan-core</feature>
-        <feature dependency="true">infinispan-hotrod-client</feature>
-        <feature dependency="true">cache-instance</feature>
-        <bundle>mvn:org.apache.camel/camel-core/${camel-version}</bundle>
-        <bundle>mvn:com.ofbizian/camel-infinispan/${project.version}</bundle>
-        <bundle>mvn:com.ofbizian/local-consumer/${project.version}</bundle>
+        <feature dependency="true">hotrod-client</feature>
+        <bundle>mvn:com.ofbizian/camel-infinispan-component/${project.version}</bundle>
+        <bundle>mvn:com.ofbizian/local-camel-consumer/${project.version}</bundle>
     </feature>
 
-    <feature name="demo-local-producer" resolver="(obr)" version="${project.version}">
+    <feature name="local-camel-producer" resolver="(obr)" version="${project.version}">
         <feature>camel</feature>
         <feature dependency="true">infinispan-core</feature>
-        <feature dependency="true">infinispan-hotrod-client</feature>
-        <feature dependency="true">cache-instance</feature>
-        <bundle>mvn:org.apache.camel/camel-core/${camel-version}</bundle>
-        <bundle>mvn:com.ofbizian/camel-infinispan/${project.version}</bundle>
-        <bundle>mvn:com.ofbizian/local-producer/${project.version}</bundle>
+        <feature dependency="true">hotrod-client</feature>
+        <bundle>mvn:com.ofbizian/camel-infinispan-component/${project.version}</bundle>
+        <bundle>mvn:com.ofbizian/local-camel-producer/${project.version}</bundle>
     </feature>
 
-    <feature name="demo-remote-producer" resolver="(obr)" version="${project.version}">
+    <feature name="remote-camel-producer" resolver="(obr)" version="${project.version}">
         <feature>camel</feature>
         <feature dependency="true">infinispan-core</feature>
-        <feature dependency="true">infinispan-hotrod-client</feature>
-        <bundle>mvn:org.apache.camel/camel-core/${camel-version}</bundle>
-        <bundle>mvn:com.ofbizian/camel-infinispan/${project.version}</bundle>
-        <bundle>mvn:com.ofbizian/remote-producer/${project.version}</bundle>
+        <feature dependency="true">hotrod-client</feature>
+        <bundle>mvn:com.ofbizian/camel-infinispan-component/${project.version}</bundle>
+        <bundle>mvn:com.ofbizian/remote-camel-producer/${project.version}</bundle>
     </feature>
-
 </features>

@@ -25,41 +25,36 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>features</artifactId>
-    <description>Features ready to be deployed to Fuse 6.1</description>
+    <artifactId>camel-infinispan-component</artifactId>
+    <packaging>bundle</packaging>
+    <description>Camel infinispan component packaged to be deployed to Fuse 6.0 or later</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-infinispan</artifactId>
+            <version>${camel-infinispan-component-version}</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <resources>
             <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
+                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
             </resource>
         </resources>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-artifacts</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>target/classes/features.xml</file>
-                                    <type>xml</type>
-                                    <classifier>features</classifier>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Embed-Dependency>*;scope=compile;inline=true</Embed-Dependency>
+                        <_include>src/main/resources/META-INF/MANIFEST.MF</_include>
+                    </instructions>
+                </configuration>
             </plugin>
         </plugins>
     </build>

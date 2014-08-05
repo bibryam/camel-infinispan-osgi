@@ -1,8 +1,5 @@
 target
 .idea
 *.iml
-*.ipr
-*.iws
-*.log
-*.epoch
+
 
