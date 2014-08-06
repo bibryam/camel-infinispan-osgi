@@ -1,4 +1,4 @@
-##JBoss Data Grid/Infinispan with JBoss Fuse Demos
+##JBoss Data Grid/Infinispan on JBoss Fuse
 These are a number of examples demonstrating how to use Infinispan/JDG on OSGI container such as Karaf/JBoss Fuse.
 
 ####Prerequisite
@@ -13,7 +13,7 @@ These are a number of examples demonstrating how to use Infinispan/JDG on OSGI c
 ####Running the Demo
 - Update runDemoOnFuse61.sh to point to jboss-fuse-full-6.1.0.redhat-379.zip. This is where the demos will be deployed.
 - Update runDemoOnFuse61.sh to point to camel-infinispan-osgi/offline-repo/target/repo. This is where Fuse will find all the features.
-- Copy and paste the content of runDemoOnFuse61.sh (don't execute the file). This will start Fuse 6.1 and install all the demos. Remote demos requires JDG running as standalone process.
+- Copy and paste the content of runDemoOnFuse61.sh (don't execute the file). This will start Fuse 6.1 and install all the demos. Remote demos require JDG running as standalone process.
 
 ####Modules/Features
 - **Local-cache** - Instantiates an Embedded Cache and exposes it as OSGI services. All the clients running in the same container can access it as OSGI service.
