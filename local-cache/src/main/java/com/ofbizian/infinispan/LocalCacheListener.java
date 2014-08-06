@@ -62,6 +62,8 @@ public class LocalCacheListener {
     @CacheEntryRemoved
     @CacheEntryVisited
     public void processEvent(CacheEntryEvent<Object, Object> event) {
-        LOGGER.info("Received CacheEntryEvent: " + event.getType() + " for key: " + event.getKey());
+        if (event.isPre()) {
+            LOGGER.info("Infinispan event: " + event.getType() + " with key: " + event.getKey());
+        }
     }
 }
