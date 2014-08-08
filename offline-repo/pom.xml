@@ -60,6 +60,7 @@
                                 <feature>local-camel-consumer</feature>
                                 <feature>local-camel-producer</feature>
                                 <feature>remote-camel-producer</feature>
+                                <feature>idempotent-consumer</feature>
                             </features>
                             <addTransitiveFeatures>true</addTransitiveFeatures>
                             <repository>target/repo</repository>

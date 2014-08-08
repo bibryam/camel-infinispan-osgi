@@ -20,29 +20,23 @@
            xsi:schemaLocation="
            http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
-  <camelContext id="remote-producer" xmlns="http://camel.apache.org/schema/blueprint">
+    <reference id="cacheManager" interface="org.infinispan.manager.EmbeddedCacheManager" />
+
+    <bean id="infinispanRepo" class="org.apache.camel.component.infinispan.processor.idempotent.InfinispanIdempotentRepository"
+          factory-method="infinispanIdempotentRepository">
+        <argument ref="cacheManager"/>
+        <argument value="idempotent"/>
+    </bean>
+
+    <camelContext id="local-producer" xmlns="http://camel.apache.org/schema/blueprint">
       <route>
-          <!-- put a value -->
-          <from uri="timer://remote?fixedRate=true&amp;period=5000"/>
+          <from uri="timer://local?fixedRate=true&amp;period=5000"/>
+          <log message="Sending request ${property.CamelTimerCounter}" loggingLevel="INFO" logName="demo5"/>
 
-          <setHeader headerName="CamelInfinispanKey">
+          <idempotentConsumer messageIdRepositoryRef="infinispanRepo">
               <property>CamelTimerCounter</property>
-          </setHeader>
-          <setHeader headerName="CamelInfinispanValue">
-              <property>CamelTimerCounter</property>
-          </setHeader>
-          <to uri="infinispan://localhost"/>
-          <to uri="log:remote-put?showAll=true"/>
-
-          <!-- Now read the same value -->
-          <setHeader headerName="CamelInfinispanOperation">
-              <constant>CamelInfinispanOperationGet</constant>
-          </setHeader>
-          <setHeader headerName="CamelInfinispanKey">
-              <property>CamelTimerCounter</property>
-          </setHeader>
-          <to uri="infinispan://localhost"/>
-          <to uri="log:remote-get?showAll=true"/>
+              <log message="Received unique request ${property.CamelTimerCounter}" loggingLevel="INFO" logName="demo5"/>
+          </idempotentConsumer>
       </route>
   </camelContext>
 

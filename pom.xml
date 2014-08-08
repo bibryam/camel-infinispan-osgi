@@ -47,6 +47,8 @@
         <module>local-camel-producer</module>
         <module>remote-camel-producer</module>
 
+        <module>idempotent-consumer</module>
+
         <module>camel-infinispan-component</module>
         <module>features</module>
         <module>offline-repo</module>
@@ -105,7 +107,7 @@
         <repository>
             <id>jboss-datagrid-repository</id>
             <name>JBoss Data Grid Maven Repository</name>
-            <url>file:///home/bibryam/Downloads/jboss-datagrid-6.3.0-maven-repository</url>
+            <url>file:///home/bibryam/apps/jboss-datagrid-6.3.0-maven-repository</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>

@@ -32,7 +32,8 @@ fabric:profile-edit --repositories mvn:com.ofbizian/features/1.0.0/xml/features 
 fabric:profile-create --parents feature-camel --version 1.0 demo1
 fabric:profile-create --parents feature-camel --version 1.0 demo2
 fabric:profile-create --parents feature-camel --version 1.0 demo3
-fabric:profile-create --parents feature-camel --version 1.0 demo3
+fabric:profile-create --parents feature-camel --version 1.0 demo4
+fabric:profile-create --parents feature-camel --version 1.0 demo5
 
 #container-add-profile root demo1
 
@@ -48,5 +49,8 @@ fabric:profile-edit --features local-camel-consumer demo3 1.1
 fabric:profile-edit --features local-camel-producer demo3 1.1
 
 fabric:profile-edit --features remote-camel-producer demo4 1.1
+
+fabric:profile-edit --features local-cache demo5 1.1
+fabric:profile-edit --features idempotent-consumer demo5 1.1
 
 container-upgrade --all 1.1

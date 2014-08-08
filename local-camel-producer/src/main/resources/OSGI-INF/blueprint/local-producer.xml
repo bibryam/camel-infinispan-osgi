@@ -26,10 +26,10 @@
       <route>
           <from uri="timer://local?fixedRate=true&amp;period=5000"/>
           <setHeader headerName="CamelInfinispanKey">
-              <property>Exchange.TIMER_COUNTER</property>
+              <property>CamelTimerCounter</property>
           </setHeader>
           <setHeader headerName="CamelInfinispanValue">
-              <property>Exchange.TIMER_COUNTER</property>
+              <property>CamelTimerCounter</property>
           </setHeader>
           <to uri="infinispan://foo?cacheContainer=#cacheManager"/>
           <to uri="log:local-put?showAll=true"/>

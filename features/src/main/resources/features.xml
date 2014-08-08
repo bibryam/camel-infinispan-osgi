@@ -58,4 +58,12 @@
         <bundle>mvn:com.ofbizian/camel-infinispan-component/${project.version}</bundle>
         <bundle>mvn:com.ofbizian/remote-camel-producer/${project.version}</bundle>
     </feature>
+
+    <feature name="idempotent-consumer" resolver="(obr)" version="${project.version}">
+        <feature>camel</feature>
+        <feature dependency="true">infinispan-core</feature>
+        <feature dependency="true">hotrod-client</feature>
+        <bundle>mvn:com.ofbizian/camel-infinispan-component/${project.version}</bundle>
+        <bundle>mvn:com.ofbizian/idempotent-consumer/${project.version}</bundle>
+    </feature>
 </features>

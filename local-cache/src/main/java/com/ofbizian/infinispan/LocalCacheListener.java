@@ -63,7 +63,7 @@ public class LocalCacheListener {
     @CacheEntryVisited
     public void processEvent(CacheEntryEvent<Object, Object> event) {
         if (event.isPre()) {
-            LOGGER.info("Infinispan event: " + event.getType() + " with key: " + event.getKey());
+            LOGGER.info("Infinispan event received: " + event.getType() + " with key: " + event.getKey());
         }
     }
 }

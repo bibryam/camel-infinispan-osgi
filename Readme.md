@@ -17,6 +17,7 @@ These are a number of examples demonstrating how to use Infinispan/JDG on OSGI c
 - **Local-Camel-Consumer** - A camel route that uses camel-infinispan component to receive events from an Embedded Cache created by Local-cache module.
 - **Local-Camel-Producer** - A camel route that uses camel-infinispan component to sent data to an Embedded Cache created by Local-cache module.
 - **Remote-Camel-Producer** - A camel route that uses camel-infinispan component to sent data to remotely running JDG 6.3 over Hot Rot protocol.
+- **Idempotent-Consumer** - A camel route with replicated idempotent consumer that keeps in sync with other idempotent consumers running in separate JVMs.
 - **Features** - Creates OSGI features so each demo is a standalone deployment unit.
 - **Offline-Repo** - Creates a repo with all the dependencies for the examples. Fuse 6.1 needs access to this repo to deploy all the features and its dependencies (JDG, Camel, etc).
 - **Camel-Infinispan-Component** - Alters camel-infinispan component's manifest so the component with version 2.13.2 can be deployed on Fuse 6.0 or Fuse 6.1
@@ -49,6 +50,20 @@ These are a number of examples demonstrating how to use Infinispan/JDG on OSGI c
     to install: container-add-profile root demo4; log:tail
     to uninstall: container-remove-profile root demo4
 
+*Demo 5. Creates two containers with idempotent consumers. The idempotent consumers discover each other and replicate state to form a distributed idempotent behaviour*
+
+    to install: container-create-child --profile demo5 root idempotent1
+    to install: container-create-child --profile demo5 root idempotent2
+    to uninstall: container-delete idempotent1
+    to uninstall: container-delete idempotent2
+
 ####Questions?
 [Bilgin Ibryam](https://github.com/bibryam)
+
+
+
+####Clustering Diagram
+![Clustering Diagram](http://4.bp.blogspot.com/-8klGVWhIpNE/UyWIpn_Cx1I/AAAAAAAAAhI/i8gAyVqIdAg/s1600/camel-infinispan-clustering.png)
+####Remote Connection Diagram
+![Remote connection Diagram](http://2.bp.blogspot.com/-SknGJlX4_DQ/UyWIp6ySoKI/AAAAAAAAAhM/OfnPFPGyrfE/s1600/camel-infinispan-remote.png)
 
