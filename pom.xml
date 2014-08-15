@@ -104,20 +104,20 @@
                 <updatePolicy>never</updatePolicy>
             </snapshots>
         </repository>
-        <repository>
-            <id>jboss-datagrid-repository</id>
-            <name>JBoss Data Grid Maven Repository</name>
-            <url>file:///home/bibryam/apps/jboss-datagrid-6.3.0-maven-repository</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
-        </repository>
+        <!--<repository>-->
+            <!--<id>jboss-datagrid-repository</id>-->
+            <!--<name>JBoss Data Grid Maven Repository</name>-->
+            <!--<url>file:///home/bibryam/apps/jboss-datagrid-6.3.0-maven-repository</url>-->
+            <!--<layout>default</layout>-->
+            <!--<releases>-->
+                <!--<enabled>true</enabled>-->
+                <!--<updatePolicy>never</updatePolicy>-->
+            <!--</releases>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+                <!--<updatePolicy>never</updatePolicy>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
         <repository>
             <releases>
                 <updatePolicy>never</updatePolicy>

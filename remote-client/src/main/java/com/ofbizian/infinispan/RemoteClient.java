@@ -49,7 +49,7 @@ public class RemoteClient {
     }
 
     public Object process(String operation, String key, String value) {
-        LOGGER.info("Remote " + operation + "{} : {} ",  key, value);
+        LOGGER.info("Remote " + operation + " {} : {} ",  key, value);
         if ("PUT".equals(operation)) {
             return cacheManager.getCache().put(key, value);
         } else  if ("GET".equals(operation)) {

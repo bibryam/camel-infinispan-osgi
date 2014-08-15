@@ -54,3 +54,6 @@ fabric:profile-edit --features local-cache demo5 1.1
 fabric:profile-edit --features idempotent-consumer demo5 1.1
 
 container-upgrade --all 1.1
+
+log:tail
+

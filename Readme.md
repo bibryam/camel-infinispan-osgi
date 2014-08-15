@@ -2,13 +2,10 @@
 These are a number of examples demonstrating how to use Infinispan/JDG on OSGI container such as Karaf/JBoss Fuse.
 
 ####Prerequisite
-- The project requires [Red Hat JBoss Data Grid 6.3.0 Maven Repository](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=31673&product=data.grid) but it would work also with Infinispan 7.0.
 - The OSGI container is [Red Hat JBoss Fuse 6.1.0 Full Install](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=29253) but Karaf 3 would also work just fine.
 
-####Building and running the project
-- Download JDG 6.3 Maven Repository
-- Update the pom.xml repository to point to JDG 6.3 Maven Repository folder
-- Run "mvn clean install" to build the project and create the offline repo with all the dependencies.
+####Building the project
+- "mvn clean install" to build the project and create the offline repo with all the dependencies.
 
 ####Modules/Features
 - **Local-cache** - Instantiates an Embedded Cache and exposes it as OSGI services. All the clients running in the same container can access it as OSGI service.
