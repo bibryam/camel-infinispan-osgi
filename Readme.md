@@ -1,11 +1,11 @@
-##JBoss Data Grid/Infinispan on JBoss Fuse
-These are a number of examples demonstrating how to use Infinispan/JDG on OSGI container such as Karaf/JBoss Fuse.
+#### JBoss Data Grid/Infinispan on JBoss Fuse
+These are a number of examples demonstrating how to use Infinispan/JDG on an OSGI container such as Karaf or JBoss Fuse.
 
-####Prerequisite
-- The OSGI container is [Red Hat JBoss Fuse 6.1.0 Full Install](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=29253) but Karaf 3 would also work just fine.
+#### Prerequisite
+The OSGI container is [Red Hat JBoss Fuse 6.1.0 Full Install](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=29253) but Karaf 3 would also work just fine.
 
 ####Building the project
-- "mvn clean install" to build the project and create the offline repo with all the dependencies.
+*mvn clean install* to build the project and create the offline repo with all the dependencies.
 
 ####Modules/Features
 - **Local-cache** - Instantiates an Embedded Cache and exposes it as OSGI services. All the clients running in the same container can access it as OSGI service.
