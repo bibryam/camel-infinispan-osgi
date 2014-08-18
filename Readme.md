@@ -61,11 +61,5 @@ These are a number of examples demonstrating how to use Infinispan/JDG on OSGI c
     to uninstall: container-delete idempotent2
     to uninstall: container-delete idempotent3
 
-####Questions?
-[Bilgin Ibryam](https://github.com/bibryam)
-
-####Clustering Diagram
-![Clustering Diagram](http://4.bp.blogspot.com/-8klGVWhIpNE/UyWIpn_Cx1I/AAAAAAAAAhI/i8gAyVqIdAg/s1600/camel-infinispan-clustering.png)
-####Remote Connection Diagram
-![Remote connection Diagram](http://2.bp.blogspot.com/-SknGJlX4_DQ/UyWIp6ySoKI/AAAAAAAAAhM/OfnPFPGyrfE/s1600/camel-infinispan-remote.png)
+![Clustering Diagram](http://1.bp.blogspot.com/-BS2C1LzZ1uI/U_KPzRTj2kI/AAAAAAAAArA/JcZx0guOcm0/s1600/IdempotentConsumer.png)
 
