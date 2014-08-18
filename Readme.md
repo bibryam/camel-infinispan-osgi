@@ -14,7 +14,7 @@ These are a number of examples demonstrating how to use Infinispan/JDG on OSGI c
 - **Local-Camel-Consumer** - A camel route that uses camel-infinispan component to receive events from an Embedded Cache created by Local-cache module.
 - **Local-Camel-Producer** - A camel route that uses camel-infinispan component to sent data to an Embedded Cache created by Local-cache module.
 - **Remote-Camel-Producer** - A camel route that uses camel-infinispan component to sent data to remotely running JDG 6.3 over Hot Rot protocol.
-- **Idempotent-Consumer** - A camel route with replicated idempotent consumer that keeps in sync with other idempotent consumers running in separate JVMs.
+- **Idempotent-Consumer** - A camel route with replicated idempotent consumer that keeps in sync with other idempotent consumers running in other JVMs. If you create multiple containers with this route deployed in it, each container starts a rest endpoint and gets a new port allocated starting from 8080 and increasing by one. A request in the form of *http://localhost:8080/idempotent/123* will be replicated to other containers so that subsequent requests to other containers with the same query key *123* like *http://localhost:8081/idempotent/123* will be rejected.
 - **Features** - Creates OSGI features so each demo is a standalone deployment unit.
 - **Offline-Repo** - Creates a repo with all the dependencies for the examples. Fuse 6.1 needs access to this repo to deploy all the features and its dependencies (JDG, Camel, etc).
 - **Camel-Infinispan-Component** - Alters camel-infinispan component's manifest so the component with version 2.13.2 can be deployed on Fuse 6.0 or Fuse 6.1
@@ -47,17 +47,22 @@ These are a number of examples demonstrating how to use Infinispan/JDG on OSGI c
     to install: container-add-profile root demo4; log:tail
     to uninstall: container-remove-profile root demo4
 
-*Demo 5. Creates two containers with idempotent consumers. The idempotent consumers discover each other and replicate state to form a distributed idempotent behaviour*
+*Demo 5. Creates three containers with idempotent consumers. The idempotent consumers discover each other and replicate state to form a distributed idempotent behaviour*
 
     to install: container-create-child --profile demo5 root idempotent1
     to install: container-create-child --profile demo5 root idempotent2
+    to install: container-create-child --profile demo5 root idempotent3
+
+    This will create 3 containers with rest endpoints on incremental ports starting from 8080.
+    A request like http://localhost:8080/idempotent/123 to the first container will replicate to other two containers, so that
+    subsequent requests to container two on port 8081 and container three on 8082 will be rejected.
+
     to uninstall: container-delete idempotent1
     to uninstall: container-delete idempotent2
+    to uninstall: container-delete idempotent3
 
 ####Questions?
 [Bilgin Ibryam](https://github.com/bibryam)
-
-
 
 ####Clustering Diagram
 ![Clustering Diagram](http://4.bp.blogspot.com/-8klGVWhIpNE/UyWIpn_Cx1I/AAAAAAAAAhI/i8gAyVqIdAg/s1600/camel-infinispan-clustering.png)

@@ -28,16 +28,12 @@
         <argument value="idempotent"/>
     </bean>
 
-    <camelContext id="local-producer" xmlns="http://camel.apache.org/schema/blueprint">
-      <route>
-          <from uri="timer://local?fixedRate=true&amp;period=5000"/>
-          <log message="Sending request ${property.CamelTimerCounter}" loggingLevel="INFO" logName="demo5"/>
+    <bean id="idempotentRoute" class="com.ofbizian.infinispan.IdempotentRoute" init-method="start">
+        <property name="infinispanRepo" ref="infinispanRepo"/>
+    </bean>
 
-          <idempotentConsumer messageIdRepositoryRef="infinispanRepo">
-              <property>CamelTimerCounter</property>
-              <log message="Received unique request ${property.CamelTimerCounter}" loggingLevel="INFO" logName="demo5"/>
-          </idempotentConsumer>
-      </route>
-  </camelContext>
+    <camelContext id="idempotent-context" xmlns="http://camel.apache.org/schema/blueprint">
+        <routeBuilder ref="idempotentRoute"/>
+    </camelContext>
 
 </blueprint>

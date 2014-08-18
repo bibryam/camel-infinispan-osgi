@@ -47,7 +47,6 @@
                                 <descriptor>mvn:org.apache.karaf.assemblies.features/enterprise/${karaf.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.apache.karaf.assemblies.features/standard/${karaf.version}/xml/features</descriptor>
                                 <descriptor>mvn:org.apache.karaf.assemblies.features/spring/${karaf.version}/xml/features</descriptor>
-
                                 <descriptor>mvn:org.infinispan/infinispan-client-hotrod/${infinispan-version}/xml/features</descriptor>
                                 <descriptor>mvn:org.infinispan/infinispan-core/${infinispan-version}/xml/features</descriptor>
                                 <descriptor>mvn:org.infinispan/infinispan-commons/${infinispan-version}/xml/features</descriptor>
