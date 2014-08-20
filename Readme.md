@@ -61,5 +61,5 @@ The OSGI container is [Red Hat JBoss Fuse 6.1.0 Full Install](https://access.red
     to uninstall: container-delete idempotent2
     to uninstall: container-delete idempotent3
 
-![Clustering Diagram](http://1.bp.blogspot.com/-BS2C1LzZ1uI/U_KPzRTj2kI/AAAAAAAAArA/JcZx0guOcm0/s1600/IdempotentConsumer.png)
+![Clustering Diagram](http://2.bp.blogspot.com/-71RxnYJAL7o/U_TxCRrI7rI/AAAAAAAAArs/VL6H7ojZYbk/s1600/IdempotentConsumer(2).png)
 
